@@ -1,24 +1,19 @@
 <?php
 
+use App\Http\Controllers\userController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/users', function () {
-    return "All users";
-});
+// We create the routes for each endpoint.
 
-Route::get('/users/{id}', function () {
-    return "One user";
-});
+Route::get('/users', [userController::class, 'index']);
 
-Route::post('/users', function () {
-    return "Create a new user";
-});
+Route::get('/users/{id}', [userController::class, 'show']);
 
-Route::put('/users/{id}', function () {
-    return "Update a user";
-});
+Route::post('/users', [userController::class, 'store']);
 
-Route::delete('/users/{id}', function () {
-    return "Delete a user";
-});
+Route::put('/users/{id}', [userController::class, 'update']);
+
+Route::patch('/users/{id}', [userController::class, 'updatePartial']);
+
+Route::delete('/users/{id}', [userController::class, 'destroy']);

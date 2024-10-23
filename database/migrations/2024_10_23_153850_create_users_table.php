@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // We create the migration with all the necessary data.
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -18,6 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone');
             $table->string('password');
+            // We created this field to monitor which person or user creates another one, mostly to keep track.
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->boolean('is_restricted')->default(false);
             $table->timestamps();
         });
     }
