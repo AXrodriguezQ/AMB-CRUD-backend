@@ -207,6 +207,7 @@ class UserController extends Controller
         }
     }
 
+    // We create the function to update a user.
     public function update($id, Request $request) {
         try {
             $user = User::find($id);
@@ -267,6 +268,7 @@ class UserController extends Controller
         }
     }
 
+    // We create the function to update a user.
     public function updatePartial($id, Request $request) {
         try {
             $user = User::find($id);
