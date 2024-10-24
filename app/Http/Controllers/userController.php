@@ -127,6 +127,52 @@ class UserController extends Controller
         }
     }
 
+    // We create endpoint to restrict a user.
+    public function restrict($id) {
+        try {
+            $user = User::find($id);
+
+            // We validate if the user exists.
+            if (!$user) {
+
+                return response()->json([
+                    'message' => 'User not found',
+                    'status' => 404
+                ], 404);
+
+            }
+
+            // We validate if the user exists.
+            if ($user->is_restricted == 1) {
+
+                return response()->json([
+                    'message' => 'This user is already restricted',
+                    'status' => 400
+                ], 400);
+
+            }
+
+            // If everything is ok we change the value and restrict it.
+            $user->is_restricted = 1;
+
+            $user->save();
+
+            // Send the response
+            return response()->json([
+                'message' => 'User restricted successfully',
+                'status' => 200
+            ], 200);
+            
+        // We handle the error.
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'An error occurred restricted user',
+                'error' => $e->getMessage(),
+                'status' => 500
+            ], 500);
+        }
+    }
+
     // We create the function to delete a user.
     public function destroy($id) {
         try {
