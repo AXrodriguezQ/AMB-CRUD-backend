@@ -11,6 +11,8 @@ Route::middleware(['jwt.auth'])->group(function () {
 
     Route::get('/users', [userController::class, 'index']);
     
+    Route::get('/restrict/{id}', [userController::class, 'restrict']);
+
     Route::get('/users/{id}', [userController::class, 'show']);
     
     Route::post('/users', [userController::class, 'store']);
