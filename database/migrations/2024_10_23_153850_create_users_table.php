@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             // We created this field to monitor which person or user creates another one, mostly to keep track.
             $table->unsignedBigInteger('created_by')->nullable();
-            $table->boolean('is_restricted')->default(false);
+            $table->string('is_restricted');
             $table->timestamps();
         });
     }
