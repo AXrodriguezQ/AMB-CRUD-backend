@@ -229,7 +229,7 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'phone' => 'required|digits:10', 
                 'password' => 'required|min:6',
-                'is_restricted' => 'in:true,false',
+                'is_restricted' => 'in:Restringido,Valido',
             ]);
 
             // We handle errors in case a validation goes wrong.
@@ -246,7 +246,7 @@ class UserController extends Controller
             $user->lastname = $request->lastname;
             $user->email = $request->email;
             $user->phone = $request->phone;
-            $user->password = $request->password;
+            $user->password = Hash::make($request->password);
             $user->is_restricted = $request->is_restricted;
 
             $user->save();
@@ -290,7 +290,7 @@ class UserController extends Controller
                 'email' => 'email|unique:users,email',
                 'phone' => 'digits:10', 
                 'password' => 'min:6',
-                'is_restricted' => 'nullable|boolean',
+                'is_restricted' => 'in:Restringido,Valido',
             ]);
 
             // We handle errors in case a validation goes wrong.
@@ -320,7 +320,7 @@ class UserController extends Controller
             }
             
             if ($request->has('password')) {
-                $user->password = $request->password;
+                $user->password = Hash::make($request->password);
             }
 
             if ($request->has('is_restricted')) {
